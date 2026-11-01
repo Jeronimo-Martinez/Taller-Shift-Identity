@@ -21,9 +21,8 @@ void apilar(vector<string>& pila, const string& simbolo) {
 }
 
 void desapilar(vector<string>& pila) {
-    if (pila.size() <= 1 && pila.back() == SIMBOLO_VACIO) {
-        cout << "-> Error: No se puede retirar el simbolo de pila vacia ("
-             << SIMBOLO_VACIO << ").\n";
+    if (pila.empty() || (pila.size() == 1 && pila.back() == SIMBOLO_VACIO)) {
+        cout << "-> Error: No se puede retirar el simbolo de pila vacia (" << SIMBOLO_VACIO << ").\n";
         return;
     }
 
@@ -34,9 +33,10 @@ void desapilar(vector<string>& pila) {
 
 int main() {
     SetConsoleOutputCP(CP_UTF8); // para mostrar el caracter "▼" en la consola correctamente
-    vector<string> pila = {SIMBOLO_VACIO};
+    vector<string> pila = { SIMBOLO_VACIO };
     int opcion;
     string simbolo;
+
 
     do {
         cout << "\n=== SIMULACION DE PILA (RECONOCEDOR) ===";
@@ -47,25 +47,33 @@ int main() {
         cout << "\nSeleccione una opcion: ";
         cin >> opcion;
 
+        if (!(cin >> opcion)) {
+            cout << "Por favor, ingrese un numero valido.\n";
+            cin.clear(); // Limpia el estado de error
+            cin.ignore(10000, '\n'); // Descarta la entrada incorrecta
+            continue; // Salta el switch y vuelve al inicio del do-while
+        }
+
         switch (opcion) {
-            case 1:
-                mostrarPila(pila);
-                break;
-            case 2:
-                cout << "Ingrese el simbolo a apilar: ";
-                cin >> simbolo;
-                apilar(pila, simbolo);
-                break;
-            case 3:
-                desapilar(pila);
-                break;
-            case 4:
-                cout << "Saliendo del programa...\n";
-                break;
-            default:
-                cout << "Opcion invalida.\n";
+        case 1:
+            mostrarPila(pila);
+            break;
+        case 2:
+            cout << "Ingrese el simbolo a apilar: ";
+            cin >> simbolo;
+            apilar(pila, simbolo);
+            break;
+        case 3:
+            desapilar(pila);
+            break;
+        case 4:
+            cout << "Saliendo del programa...\n";
+            break;
+        default:
+            cout << "Opcion invalida.\n";
         }
     } while (opcion != 4);
 
     return 0;
 }
+
