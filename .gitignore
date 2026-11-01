@@ -69,3 +69,4 @@ Testing/
 
 .clang-tidy
 /CMakeLists.txt
+.idea/workspace.xml
