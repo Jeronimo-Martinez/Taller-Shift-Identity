@@ -37,7 +37,7 @@ string obtenerTextoDecisiones(const vector<string>& decs) {
 int main() {
     SetConsoleOutputCP(CP_UTF8);
     vector<string> simbolosEntrada = { "a", "b","c" ,"d","e",FIN_SECUENCIA};
-    vector<string> simbolosPila = { SIMBOLO_VACIO,"S","B","C","a", "b","c" ,"d","e"};
+    vector<string> simbolosPila = { SIMBOLO_VACIO,"S","A","B","C","a", "b","c" ,"d","e"};
 
     vector<Produccion> gramatica = {
         {1, "S", "bASB"},
